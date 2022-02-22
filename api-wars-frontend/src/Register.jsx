@@ -62,8 +62,8 @@ const Register = (props) => {
         setLoading(false);
         setUserName("");
         setPassword("");
+        navigate("/login");
       });
-    return navigate("/login");
   };
 
   const handleSubmit = (e) => {
