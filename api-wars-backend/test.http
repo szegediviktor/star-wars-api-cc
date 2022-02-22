@@ -1,0 +1,16 @@
+POST http://localhost:8000/signup
+Content-Type: application/json
+
+{
+  "userName": "szeg.vik@gmail.com",
+  "password": "1234"
+}
+
+###
+POST http://localhost:8000/signin
+Content-Type: application/json
+
+{
+  "userName": "szeg.vik@gmail.com",
+  "password": "1234"
+}
