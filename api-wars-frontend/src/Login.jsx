@@ -7,45 +7,36 @@ import FilledInput from "@mui/material/FilledInput";
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import Button from "@mui/material/Button";
+import FormHelperText from "@mui/material/FormHelperText";
 
-const signup = (userName, password) => {
-    let status = true;
-
-    return fetch("/register", {
+const signin = (userName, password) => {
+    return fetch("/login", {
         method: "POST",
         headers: {
             "Content-type": "application/json",
         },
         body: JSON.stringify({ userName, password }),
-    })
-        .then((res) => {
-            if (!res.ok) {
-                status = false;
-            }
-            return res;
-        })
-        .then((res) => {
+    }).then((res) => {
+        if (res.ok) {
             return res.json();
-        })
-        .then((info) => {
-            if (status) {
-                return info;
-            }
-            throw info;
-        });
+        }
+        throw new Error("Wrong credentials");
+    });
 };
 
-const Register = (props) => {
+const Login = (props) => {
     const [userName, setUserName] = useState("");
     const [password, setPassword] = useState("");
+
+    const [helperText, setHelperText] = useState("");
 
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false);
 
-    const handleSignUp = (userName, password) => {
+    const handleSignIn = (userName, password) => {
         setError(null);
         setLoading(true);
-        signup(userName, password)
+        signin(userName, password)
             .then(() => {
                 props.onSuccess();
             })
@@ -63,7 +54,10 @@ const Register = (props) => {
     const handleSubmit = (e) => {
         e.preventDefault();
         if (userName || password) {
-            return handleSignUp(userName, password);
+            return handleSignIn(userName, password);
+        }
+        if (!userName || !password) {
+            setHelperText("Please, fill in both fields.");
         }
     };
 
@@ -106,6 +100,7 @@ const Register = (props) => {
                     disabled={loading}
                 />
             </FormControl>
+            <FormHelperText>{helperText}</FormHelperText>
             <Button
                 variant="contained"
                 color="primary"
@@ -113,10 +108,10 @@ const Register = (props) => {
                 className="submit-btn"
                 disabled={loading}
             >
-                Register
+                Login
             </Button>
         </Box>
     );
 };
 
-export default Register;
+export default Login;

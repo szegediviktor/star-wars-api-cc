@@ -90,7 +90,7 @@ app.post("/register", (req, res, next) => {
         });
 });
 
-app.post("/signin", passport.authenticate("local"), (req, res, next) => {
+app.post("/login", passport.authenticate("local"), (req, res, next) => {
     res.json(req.user);
 });
 

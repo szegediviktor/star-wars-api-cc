@@ -1,10 +1,14 @@
 import { Routes, Route, Link } from "react-router-dom";
 import Home from "./Home";
+import Login from "./Login";
 import Register from "./Register";
 
 function App() {
     const handleSignUpOnSuccess = () => {
         console.log("done");
+    };
+    const handleSignInOnSuccess = () => {
+        console.log("done it");
     };
 
     return (
@@ -21,7 +25,10 @@ function App() {
                     path="/register"
                     element={<Register onSuccess={handleSignUpOnSuccess} />}
                 />
-                <Route path="/login" element={<div>Login</div>} />
+                <Route
+                    path="/login"
+                    element={<Login onSuccess={handleSignInOnSuccess} />}
+                />
             </Routes>
         </div>
     );
