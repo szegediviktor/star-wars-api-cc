@@ -10,24 +10,59 @@ import Button from "@mui/material/Button";
 const Nav = () => {
     return (
         <Box sx={{ flexGrow: 1 }}>
-            <AppBar position="static">
+            <AppBar position="static" color="secondary">
                 <Toolbar>
-                    <Button color="inherit">
-                        <Link to="/">Home</Link>
-                    </Button>
-                    <Button color="inherit">
-                        <Link to="/register">Registration</Link>
-                    </Button>
-                    <Button color="inherit">
-                        <Link to="login">Login</Link>
-                    </Button>
-                    <Typography
-                        variant="h6"
-                        component="div"
-                        sx={{ flexGrow: 1 }}
-                    >
-                        Show username if logined
-                    </Typography>
+                    <Box m={2} pt={1}>
+                        <Button variant="contained">
+                            <Link to="/">
+                                <Typography
+                                    variant="button"
+                                    component="div"
+                                    color="secondary"
+                                    sx={{ flexGrow: 1 }}
+                                >
+                                    Home
+                                </Typography>
+                            </Link>
+                        </Button>
+                    </Box>
+                    <Box m={2} pt={1}>
+                        <Button variant="contained" color="primary">
+                            <Link to="/register">
+                                <Typography
+                                    variant="button"
+                                    component="div"
+                                    color="secondary"
+                                    sx={{ flexGrow: 1 }}
+                                >
+                                    Registration
+                                </Typography>
+                            </Link>
+                        </Button>
+                    </Box>
+                    <Box m={2} pt={1}>
+                        <Button variant="contained" color="primary">
+                            <Link to="login">
+                                <Typography
+                                    variant="button"
+                                    component="div"
+                                    color="secondary"
+                                    sx={{ flexGrow: 1 }}
+                                >
+                                    Login
+                                </Typography>
+                            </Link>
+                        </Button>
+                    </Box>
+                    <Box m={2} pt={1}>
+                        <Typography
+                            variant="subtitle1"
+                            component="div"
+                            sx={{ flexGrow: 1 }}
+                        >
+                            Show username if logined
+                        </Typography>
+                    </Box>
                 </Toolbar>
             </AppBar>
         </Box>
