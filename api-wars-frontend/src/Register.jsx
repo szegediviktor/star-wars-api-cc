@@ -44,6 +44,7 @@ const Register = (props) => {
 
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
+  // const [isSuccesful, setIsSuccesful] = useState(false);
   let navigate = useNavigate();
 
   const handleSignUp = (userName, password) => {
@@ -71,6 +72,11 @@ const Register = (props) => {
     if (userName || password) {
       return handleSignUp(userName, password);
     }
+    // if (!error?.message) {
+    //   console.log(error?.message);
+    //   setIsSuccesful(true);
+    //   console.log(isSuccesful);
+    // }
   };
 
   const handleUserNameChange = (e) => {
@@ -122,6 +128,7 @@ const Register = (props) => {
       >
         Register
       </Button>
+      {/* {!error?.message && <p>OKÉ</p>} */}
     </Box>
   );
 };

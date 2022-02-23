@@ -98,7 +98,13 @@ app.post("/register", async (req, res, next) => {
   res.json({ ok: true });
 });
 
-app.post("/login", passport.authenticate("local"), (req, res, next) => {
+app.post("/login", passport.authenticate("local"), async (req, res, next) => {
+  const { userName, password } = req.body;
+  const user = await findUserByUserName(userName);
+  if (user.userName !== userName || user.password !== password) {
+    return res.status(400).json({ message: "Wrong username or password!" });
+  }
+
   res.json(req.user);
 });
 
