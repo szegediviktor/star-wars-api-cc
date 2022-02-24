@@ -12,3 +12,35 @@ body {
 * {
   text-decoration: none;
 }
+
+.container {
+  overflow-x: auto;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 50px;
+  padding: 10px;
+  margin: 10px;
+}
+
+.title {
+  margin-top: 20px;
+  text-align: center;
+}
+
+tr {
+  height: 40px !important;
+}
+
+th {
+  max-width: 125px;
+  padding: 0 !important;
+  white-space: wrap;
+  word-wrap: break-word;
+  text-align: center !important;
+}
+
+td {
+  height: 40px !important;
+  padding: 5px !important;
+  text-align: center !important;
+}

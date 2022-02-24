@@ -40,19 +40,22 @@ const Nav = (props) => {
               </Link>
             </Button>
           </Box>
+
           <Box m={2} pt={1}>
-            <Button variant="contained" color="primary">
-              <Link to="login">
-                <Typography
-                  variant="button"
-                  component="div"
-                  color="secondary"
-                  sx={{ flexGrow: 1 }}
-                >
-                  Login
-                </Typography>
-              </Link>
-            </Button>
+            {!props.user?.userName && (
+              <Button variant="contained" color="primary">
+                <Link to="login">
+                  <Typography
+                    variant="button"
+                    component="div"
+                    color="secondary"
+                    sx={{ flexGrow: 1 }}
+                  >
+                    Login
+                  </Typography>
+                </Link>
+              </Button>
+            )}
           </Box>
           <Box m={2} pt={1}>
             {props.user?.userName && (
