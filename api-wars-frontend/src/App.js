@@ -1,9 +1,9 @@
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Home from "./Home";
 import Login from "./Login";
 import Register from "./Register";
-import { useNavigate } from "react-router-dom";
 import Nav from "./Nav";
+import "./index.css";
 
 // mui
 import { ThemeProvider } from "@mui/material";
@@ -20,6 +20,9 @@ const theme = createTheme({
     },
     warning: {
       main: "#e6e6db",
+    },
+    background: {
+      paper: "#4e4e4e",
     },
   },
   typography: {
@@ -53,7 +56,7 @@ function App() {
       <div className="App">
         <Nav user={user} logOut={logOut} />
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Home theme={theme} />} />
           <Route
             path="/register"
             element={<Register onSuccess={handleSignUpOnSuccess} />}
