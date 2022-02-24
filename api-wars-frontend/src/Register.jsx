@@ -9,7 +9,7 @@ import InputLabel from "@mui/material/InputLabel";
 import Button from "@mui/material/Button";
 import FormHelperText from "@mui/material/FormHelperText";
 import { useNavigate } from "react-router-dom";
-import { makeStyles } from "@material-ui/core";
+import Typography from "@mui/material/Typography";
 
 // grid
 import { Grid } from "@mui/material";
@@ -99,10 +99,6 @@ const Register = (props) => {
       noValidate
       autoComplete="off"
       onSubmit={handleSubmit}
-      // display="flex"
-      // alignItems="center"
-      // justifyContent="center"
-      // bgcolor="warning.main"
       width="100%"
       height="100%"
     >
@@ -112,7 +108,12 @@ const Register = (props) => {
         alignItems="center"
         justifyContent="center"
       >
-        <Grid item xs={12} md={6} lg={3} m={4} pt={5}>
+        <Grid item xs={12} md={6} lg={3} m={1} pt={1}>
+          <Typography variant="h3" gutterBottom component="div">
+            Registration
+          </Typography>
+        </Grid>
+        <Grid item xs={12} md={6} lg={3} m={1} pt={5}>
           <FormControl variant="filled">
             <InputLabel htmlFor="component-filled" color="secondary">
               Username
