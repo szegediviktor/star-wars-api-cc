@@ -8,55 +8,66 @@ import Nav from "./Nav";
 // mui
 import { ThemeProvider } from "@mui/material";
 import { createTheme } from "@mui/material/styles";
+import { useState } from "react";
 
 const theme = createTheme({
-    palette: {
-        primary: {
-            main: "#eeef2f",
-        },
-        secondary: {
-            main: "#262626",
-        },
-        warning: {
-            main: "#e6e6db",
-        },
+  palette: {
+    primary: {
+      main: "#eeef2f",
     },
-    typography: {
-        fontFamily: "Quicksand",
-        fontWeightLight: 400,
-        fontWeightRegular: 500,
-        fontWeightMedium: 600,
-        fontWeightBold: 700,
+    secondary: {
+      main: "#262626",
     },
+    warning: {
+      main: "#e6e6db",
+    },
+  },
+  typography: {
+    fontFamily: "Quicksand",
+    fontWeightLight: 400,
+    fontWeightRegular: 500,
+    fontWeightMedium: 600,
+    fontWeightBold: 700,
+  },
 });
 
 function App() {
-    //let navigate = useNavigate();
-    const handleSignUpOnSuccess = () => {
-        //return navigate("/login");
-    };
-    const handleSignInOnSuccess = () => {
-        console.log("done it");
-    };
+  const [user, setUser] = useState("");
 
-    return (
-        <ThemeProvider theme={theme}>
-            <div className="App">
-                <Nav />
-                <Routes>
-                    <Route path="/" element={<Home />} />
-                    <Route
-                        path="/register"
-                        element={<Register onSuccess={handleSignUpOnSuccess} />}
-                    />
-                    <Route
-                        path="/login"
-                        element={<Login onSuccess={handleSignInOnSuccess} />}
-                    />
-                </Routes>
-            </div>
-        </ThemeProvider>
-    );
+  const handleSignUpOnSuccess = () => {
+    console.log("sikeres regisztráció");
+  };
+  const handleSignInOnSuccess = () => {
+    console.log("done it");
+  };
+
+  const addUser = (user) => {
+    setUser(user);
+  };
+
+  const logOut = () => {
+    setUser();
+  };
+  return (
+    <ThemeProvider theme={theme}>
+      <div className="App">
+        <Nav user={user} logOut={logOut} />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route
+            path="/register"
+            element={<Register onSuccess={handleSignUpOnSuccess} />}
+          />
+          <Route
+            path="/login"
+            element={
+              <Login onSuccess={handleSignInOnSuccess} addUser={addUser} />
+            }
+          />
+        </Routes>
+      </div>
+    </ThemeProvider>
+  );
 }
 
 export default App;

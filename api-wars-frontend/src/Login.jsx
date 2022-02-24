@@ -9,29 +9,27 @@ import InputLabel from "@mui/material/InputLabel";
 import Button from "@mui/material/Button";
 import FormHelperText from "@mui/material/FormHelperText";
 
-const signin = (userName, password) => {
-  return fetch("/login", {
-    method: "POST",
-    headers: {
-      "Content-type": "application/json",
-    },
-    body: JSON.stringify({ userName, password }),
-  }).then((res) => {
-    if (res.ok) {
-      return res.json();
-    }
-    throw new Error("Wrong credentials");
-  });
-};
-
 const Login = (props) => {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
-
   const [helperText, setHelperText] = useState("");
-
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
+
+  const signin = (userName, password) => {
+    return fetch("/login", {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify({ userName, password }),
+    }).then((res) => {
+      if (res.ok) {
+        return res.json().then((data) => props.addUser(data));
+      }
+      throw new Error("Wrong credentials");
+    });
+  };
 
   const handleSignIn = (userName, password) => {
     setError(null);

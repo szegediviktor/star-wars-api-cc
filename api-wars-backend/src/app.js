@@ -80,6 +80,22 @@ passport.use(
   )
 );
 
+const logout = async (req, res, next) => {
+  if (req.isUnauthenticated()) {
+    console.log(req.isUnauthenticated);
+    res.status(401);
+    res.json({ message: "Unauthorized" });
+  } else {
+    req.logout();
+    req.session.destroy(function (err) {
+      if (err) {
+        console.log(err);
+      }
+    });
+    res.json({ message: "Logout success" });
+  }
+};
+
 app.post("/register", async (req, res, next) => {
   const { userName, password } = req.body;
 
@@ -99,13 +115,13 @@ app.post("/register", async (req, res, next) => {
 });
 
 app.post("/login", passport.authenticate("local"), async (req, res, next) => {
-  const { userName, password } = req.body;
-  const user = await findUserByUserName(userName);
-  if (user.userName !== userName || user.password !== password) {
-    return res.status(400).json({ message: "Wrong username or password!" });
-  }
+  // const { userName, password } = req.body;
+  // const user = await findUserByUserName(userName);
+  // if (user.userName !== userName || user.password !== password) {
+  //   return res.status(400).json({ message: "Wrong username or password!" });
+  // }
 
-  res.json(req.user);
+  res.json({ userName: req.body.userName });
 });
 
 app.get("/google", passport.authenticate("google", { scope: ["email"] }));
@@ -116,6 +132,10 @@ app.get("/google/callback", passport.authenticate("google"), (req, res) => {
 app.get("/health", (req, res) => {
   //memory usage
   res.json({ ok: true, ...process.memoryUsage() });
+});
+
+app.get("/logout", (req, res, next) => {
+  logout(req, res, next);
 });
 
 // const verify = (req, res, next) => {
