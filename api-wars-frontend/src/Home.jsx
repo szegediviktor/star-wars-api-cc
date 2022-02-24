@@ -62,7 +62,7 @@ const Home = (props) => {
     top: "50%",
     left: "50%",
     transform: "translate(-50%, -50%)",
-    width: 400,
+    width: 700,
     bgcolor: "white",
     color: props.theme.palette.primary,
     border: "2px solid #000",
@@ -202,7 +202,44 @@ const Home = (props) => {
                           <Table>
                             <TableBody>
                               <TableRow>
-                                <TableCell>{resident.name}</TableCell>
+                                <TableCell>Name</TableCell>
+                                <TableCell>Height</TableCell>
+                                <TableCell>Masss</TableCell>
+                                <TableCell>Skin color</TableCell>
+                                <TableCell>Hair color</TableCell>
+                                <TableCell>Eye color</TableCell>
+                                <TableCell>Birth year</TableCell>
+                                <TableCell>Gender</TableCell>
+                              </TableRow>
+                              <TableRow>
+                                <TableCell>Leia Organa</TableCell>
+                                <TableCell>1.50 m</TableCell>
+                                <TableCell>49 kg</TableCell>
+                                <TableCell>light</TableCell>
+                                <TableCell>brown</TableCell>
+                                <TableCell>brown</TableCell>
+                                <TableCell>19BBY</TableCell>
+                                <TableCell>female</TableCell>
+                              </TableRow>
+                              <TableRow>
+                                <TableCell>Bail Prestor Organa</TableCell>
+                                <TableCell>1.91 m</TableCell>
+                                <TableCell>unknown</TableCell>
+                                <TableCell>tan</TableCell>
+                                <TableCell>black</TableCell>
+                                <TableCell>brown</TableCell>
+                                <TableCell>67BBY</TableCell>
+                                <TableCell>male</TableCell>
+                              </TableRow>
+                              <TableRow>
+                                <TableCell>Raymus Antilles</TableCell>
+                                <TableCell>1.88 m</TableCell>
+                                <TableCell>79 kg</TableCell>
+                                <TableCell>brown</TableCell>
+                                <TableCell>light</TableCell>
+                                <TableCell>brown</TableCell>
+                                <TableCell>unknown</TableCell>
+                                <TableCell>male</TableCell>
                               </TableRow>
                             </TableBody>
                           </Table>
