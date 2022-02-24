@@ -9,6 +9,7 @@ import InputLabel from "@mui/material/InputLabel";
 import Button from "@mui/material/Button";
 import FormHelperText from "@mui/material/FormHelperText";
 import { useNavigate } from "react-router-dom";
+import { makeStyles } from "@material-ui/core";
 
 // grid
 import { Grid } from "@mui/material";
@@ -47,7 +48,7 @@ const Register = (props) => {
 
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
-  // const [isSuccesful, setIsSuccesful] = useState(false);
+
   let navigate = useNavigate();
 
   const handleSignUp = (userName, password) => {
@@ -144,7 +145,9 @@ const Register = (props) => {
           </FormControl>
         </Grid>
         <Grid item xs={12} md={6} lg={3} m={3} pt={2}>
-          <FormHelperText>{helperText}</FormHelperText>
+          <FormHelperText sx={{ color: props.theme.palette.warning.main }}>
+            {helperText}
+          </FormHelperText>
           <Button
             variant="contained"
             color="primary"

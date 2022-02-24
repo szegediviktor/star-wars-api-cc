@@ -40,6 +40,7 @@ const Login = (props) => {
       })
       .catch((err) => {
         setError(err);
+        setHelperText(err.message);
         console.log(err);
       })
       .finally(() => {
@@ -98,7 +99,9 @@ const Login = (props) => {
           disabled={loading}
         />
       </FormControl>
-      <FormHelperText>{helperText}</FormHelperText>
+      <FormHelperText sx={{ color: props.theme.palette.warning.main }}>
+        {helperText}
+      </FormHelperText>
       <Button
         variant="contained"
         color="primary"
