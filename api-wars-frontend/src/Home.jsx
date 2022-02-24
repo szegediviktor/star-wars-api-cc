@@ -12,31 +12,12 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Button";
 import { ButtonGroup, Grid, Typography } from "@mui/material";
-import Modal from "@mui/material/Modal";
-import Box from "@mui/material/Box";
-import IconButton from "@material-ui/core/IconButton";
-import CloseIcon from "@mui/icons-material/Close";
-import DialogTitle from "@material-ui/core/DialogTitle";
+
+import CustomModal from "./CustomModal";
 
 const Home = (props) => {
   const [planets, setPlanets] = useState([]);
-  const [open, setOpen] = useState(false);
   const [page, setPage] = useState(1);
-  const [resident, setResident] = useState({});
-
-  const handleOpen = () => {
-    setOpen(true);
-    planets.results?.residents?.map((resi) =>
-      fetch(resi)
-        .then((res) => res.json())
-        .then((data) => {
-          setResident(data);
-          console.log(resident);
-        })
-    );
-  };
-
-  const handleClose = () => setOpen(false);
 
   useEffect(() => {
     fetch(`https://swapi.dev/api/planets/?page=${page}`)
@@ -44,31 +25,8 @@ const Home = (props) => {
       .then((data) => {
         setPlanets(data);
       });
+    // eslint-disable-next-line
   }, []);
-
-  // useEffect(() => {
-  //   planets.results?.residents?.map((resi) =>
-  //     fetch(resi)
-  //       .then((res) => res.json())
-  //       .then((data) => {
-  //         setResident(data);
-  //         console.log(resident);
-  //       })
-  //   );
-  // }, [resident]);
-
-  const style = {
-    position: "absolute",
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-    width: 700,
-    bgcolor: "white",
-    color: props.theme.palette.primary,
-    border: "2px solid #000",
-    boxShadow: 10,
-    p: 4,
-  };
 
   //formátum átalakítás
   function numberWithCommas(x) {
@@ -91,6 +49,10 @@ const Home = (props) => {
         setPlanets(data);
         setPage(page - 1);
       });
+  };
+
+  const style = {
+    color: props.theme.palette.primary.light,
   };
 
   return (
@@ -121,6 +83,7 @@ const Home = (props) => {
         <TableContainer
           component={Paper}
           className="container"
+          color="white"
           sx={{ mx: "auto", maxWidth: 1000, p: 1, m: 1 }}
         >
           <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -164,88 +127,7 @@ const Home = (props) => {
                       : `${numberWithCommas(planet.population)} people`}
                   </TableCell>
                   <TableCell>
-                    {planet.residents.length > 0 ? (
-                      <Button
-                        variant="contained"
-                        color="secondary"
-                        onClick={handleOpen}
-                      >
-                        <Typography
-                          variant="caption"
-                          component="div"
-                          color="primary"
-                          sx={{ flexGrow: 1 }}
-                        >
-                          {planet.residents.length === 1
-                            ? `${planet.residents.length} resident`
-                            : `${planet.residents.length} residents`}
-                        </Typography>
-                      </Button>
-                    ) : (
-                      "No known residents"
-                    )}
-                    <Modal
-                      open={open}
-                      onClose={handleClose}
-                      aria-labelledby="modal-modal-title"
-                      aria-describedby="modal-modal-description"
-                      BackdropProps={{
-                        style: { backgroundColor: "rgba(0,0,0,0.05)" },
-                      }}
-                    >
-                      <Box sx={style}>
-                        <Typography
-                          id="modal-modal-description"
-                          sx={{ mt: 2 }}
-                        ></Typography>
-                        <TableContainer>
-                          <Table>
-                            <TableBody>
-                              <TableRow>
-                                <TableCell>Name</TableCell>
-                                <TableCell>Height</TableCell>
-                                <TableCell>Masss</TableCell>
-                                <TableCell>Skin color</TableCell>
-                                <TableCell>Hair color</TableCell>
-                                <TableCell>Eye color</TableCell>
-                                <TableCell>Birth year</TableCell>
-                                <TableCell>Gender</TableCell>
-                              </TableRow>
-                              <TableRow>
-                                <TableCell>Leia Organa</TableCell>
-                                <TableCell>1.50 m</TableCell>
-                                <TableCell>49 kg</TableCell>
-                                <TableCell>light</TableCell>
-                                <TableCell>brown</TableCell>
-                                <TableCell>brown</TableCell>
-                                <TableCell>19BBY</TableCell>
-                                <TableCell>female</TableCell>
-                              </TableRow>
-                              <TableRow>
-                                <TableCell>Bail Prestor Organa</TableCell>
-                                <TableCell>1.91 m</TableCell>
-                                <TableCell>unknown</TableCell>
-                                <TableCell>tan</TableCell>
-                                <TableCell>black</TableCell>
-                                <TableCell>brown</TableCell>
-                                <TableCell>67BBY</TableCell>
-                                <TableCell>male</TableCell>
-                              </TableRow>
-                              <TableRow>
-                                <TableCell>Raymus Antilles</TableCell>
-                                <TableCell>1.88 m</TableCell>
-                                <TableCell>79 kg</TableCell>
-                                <TableCell>brown</TableCell>
-                                <TableCell>light</TableCell>
-                                <TableCell>brown</TableCell>
-                                <TableCell>unknown</TableCell>
-                                <TableCell>male</TableCell>
-                              </TableRow>
-                            </TableBody>
-                          </Table>
-                        </TableContainer>
-                      </Box>
-                    </Modal>
+                    <CustomModal planet={planet} theme={props.theme} />
                   </TableCell>
                 </TableRow>
               ))}
