@@ -32,6 +32,7 @@ const theme = createTheme({
     fontWeightMedium: 600,
     fontWeightBold: 700,
   },
+  spacing: [0, 4, 8, 16, 32, 64],
 });
 
 function App() {
