@@ -19,7 +19,7 @@ const theme = createTheme({
       main: "#262626",
     },
     warning: {
-      main: "#e6e6db",
+      main: "#b71c1c",
     },
     background: {
       paper: "#4e4e4e",
@@ -60,12 +60,18 @@ function App() {
           <Route path="/" element={<Home theme={theme} />} />
           <Route
             path="/register"
-            element={<Register onSuccess={handleSignUpOnSuccess} />}
+            element={
+              <Register onSuccess={handleSignUpOnSuccess} theme={theme} />
+            }
           />
           <Route
             path="/login"
             element={
-              <Login onSuccess={handleSignInOnSuccess} addUser={addUser} />
+              <Login
+                onSuccess={handleSignInOnSuccess}
+                addUser={addUser}
+                theme={theme}
+              />
             }
           />
         </Routes>
