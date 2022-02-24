@@ -14,13 +14,28 @@ import Button from "@mui/material/Button";
 import { ButtonGroup, Grid, Typography } from "@mui/material";
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
+import IconButton from "@material-ui/core/IconButton";
+import CloseIcon from "@mui/icons-material/Close";
+import DialogTitle from "@material-ui/core/DialogTitle";
 
 const Home = (props) => {
   const [planets, setPlanets] = useState([]);
   const [open, setOpen] = useState(false);
   const [page, setPage] = useState(1);
+  const [resident, setResident] = useState({});
 
-  const handleOpen = () => setOpen(true);
+  const handleOpen = () => {
+    setOpen(true);
+    planets.results?.residents?.map((resi) =>
+      fetch(resi)
+        .then((res) => res.json())
+        .then((data) => {
+          setResident(data);
+          console.log(resident);
+        })
+    );
+  };
+
   const handleClose = () => setOpen(false);
 
   useEffect(() => {
@@ -30,6 +45,17 @@ const Home = (props) => {
         setPlanets(data);
       });
   }, []);
+
+  // useEffect(() => {
+  //   planets.results?.residents?.map((resi) =>
+  //     fetch(resi)
+  //       .then((res) => res.json())
+  //       .then((data) => {
+  //         setResident(data);
+  //         console.log(resident);
+  //       })
+  //   );
+  // }, [resident]);
 
   const style = {
     position: "absolute",
@@ -169,16 +195,18 @@ const Home = (props) => {
                     >
                       <Box sx={style}>
                         <Typography
-                          id="modal-modal-title"
-                          variant="h6"
-                          component="h2"
-                        >
-                          Text in a modal
-                        </Typography>
-                        <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                          Duis mollis, est non commodo luctus, nisi erat
-                          porttitor ligula.
-                        </Typography>
+                          id="modal-modal-description"
+                          sx={{ mt: 2 }}
+                        ></Typography>
+                        <TableContainer>
+                          <Table>
+                            <TableBody>
+                              <TableRow>
+                                <TableCell>{resident.name}</TableCell>
+                              </TableRow>
+                            </TableBody>
+                          </Table>
+                        </TableContainer>
                       </Box>
                     </Modal>
                   </TableCell>
